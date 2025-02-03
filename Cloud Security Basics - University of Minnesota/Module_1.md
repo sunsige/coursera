@@ -639,7 +639,7 @@ Describe the Internet service provided.
 
 The service publishes critical schedules, ensuring that users can access accurate, up-to-date information. It is publicly accessible and provides a reliable source for time-sensitive data.
 
-***Rubrics**
+**Rubrics**
 
 - Does it describe the type of information the site provides, or the action it performs, in response to a service request?
 - Does it describe how a user requests services from the site?
@@ -655,7 +655,7 @@ The sponsoring enterprise is an information service provider focused on deliveri
 - Generating revenue through advertisements, subscriptions, or contracts
 - Supporting public or private organisations with mission-critical operations
 
-***Rubrics**
+**Rubrics**
 
 - There is a description of the sponsoring enterprise
 - There is a reasonable description of why the enterprise exists and continues to operate.
@@ -671,7 +671,7 @@ Operating the service is justified as it:
 - Supports stakeholders’ operations, strengthening partnerships and potential business opportunities
 - Enhances the enterprise’s reputation, providing competitive advantages in the information services sector
 
-***Rubrics**
+**Rubrics**
 
 - Does the explanation identify income the sponsor receives from the service, or losses the sponsor suffers if the service fails?
 
@@ -683,7 +683,7 @@ Clients: Individuals and organisations relying on the schedule for operational p
 
 Stakeholders: External entities (e.g., transport authorities, event organisers) funding or depending on the service for their objectives. Advertisers: Use the platform’s traffic to reach potential customers and provide revenue streams.
 
-***Rubrics**
+**Rubrics**
 
 - Is there at least one interested party described? Do not include the sponsoring enterprise as an interested party.
 - Is there a description of some type of visitor or client who uses the service?
@@ -704,7 +704,7 @@ Confidentiality: Low
 Integrity: None
 Availability: None
 
-***Rubrics**
+**Rubrics**
 
 - Does the impact description refer to information disclosure?
 - Does the impact description explain how the breach affects the sponsoring enterprise?
@@ -721,7 +721,7 @@ Confidentiality: None
 Integrity: High
 Availability: None
 
-***Rubrics**
+**Rubrics**
 
 - Does the impact description refer to an attack that changes the service's data and/or software?
 - Does the impact description explain how the attack affects the sponsoring enterprise?
@@ -738,7 +738,7 @@ Confidentiality: None
 Integrity: None
 Availability: High
 
-***Rubrics**
+**Rubrics**
 
 - Does the impact description refer to an attack that prevents authorised clients from using the service?
 - Does the impact description explain how the attack affects the sponsoring enterprise?

@@ -233,13 +233,13 @@ Given the address 2607:f8b0:4005:80a:0:0:0:200e identify the type of network add
 
 ## Question 4
 
-Which of the following is an example of a network with a layered defense?
+Which of the following is an example of a network with a layered defence?
 
 - **It blocks the attacker from connecting directly to the target. The attacker must first penetrate a host that is reachable and that connects to the target.**
 - It blocks Layer 2 traffic from entering the local site. The traffic must include Layer 3 addressing.
 - It deploys Network Address Translation to block inbound internet connections.
 
-*Note: The layered defense requires the attacker to perform multiple attacks.*
+*Note: The layered defence requires the attacker to perform multiple attacks.*
 
 ## Question 5
 
@@ -305,3 +305,297 @@ For security reasons, Amalgamated Widget has kept part of their accounting depar
 - **The network needs a Layer 3 gateway with network address translation**
 
 *Note: The private IP V4 addresses must be converted to a public address before they can communicate with hosts on the public internet.*
+
+# Security Controls
+
+![traffic filtering](<images/Traffic Filtering 1.png>)
+
+## Packet Filtering
+- The step 4 network follows the principle of least privilege
+- Traffic filtering partitions the network and strengthens authentication
+- Four types of control enforced:  
+  1. **Service Control** – Restricts access to internet services
+  2. **Network Control** – Regulates traffic flow between hosts/networks
+  3. **Circuit Control** – Manages connections between hosts and sockets 
+  4. **Content Control** – Inspects application-level data for security threats
+- Applies access restrictions to each packet independently
+- Filters traffic based on packet headers (e.g., IP addresses, ports)
+
+![layers 1 and 2](<images/Traffic Filtering 2.png>)
+![layers 3 and 4](<images/Traffic Filtering 3.png>)
+
+- Works at various OSI layers:  
+  - **Layer 1 (Physical):** Identifies physical network connections
+  - **Layer 2 (Data Link):** Uses MAC addresses and Layer 3 protocol identifiers
+  - **Layer 3 (Network):** Examines IP headers (source/destination addresses)
+  - **Layer 4 (Transport):** Inspects port numbers and connection status
+
+![service control](<images/Traffic Filtering 4.png>)
+
+### Service Control
+- Restricts internet services to reduce attack surface
+- Essential ports for public internet services:
+  - **Port 80 (HTTP), Port 53 (DNS), Port 25 (Email)**  
+- Inbound traffic is limited to services in the **DMZ** (Demilitarised Zone)
+- Internal LAN services are blocked from the general internet
+- Uses packet headers to filter based on:
+  - **Physical connection (Layer 1)**  
+  - **Port numbers and transport protocols (Layer 4)**  
+
+### Network Control
+- Regulates traffic between networks (e.g., Internet, DMZ, Local LAN)
+- **Key filtering criteria**
+  - Physical network source
+  - Network address (ignores MAC addresses due to changes between hops)
+- **Enforces two rules**  
+  1. **Blocks unauthorised traffic flow** (e.g., Internet to internal LAN)
+  2. **Prevents spoofed IP addresses** (e.g., forged internal addresses from external sources)
+- Often combined with **service control** to restrict specific services
+
+## Circuit & Content Control
+
+### Circuit Filtering**
+
+![circuit filtering](<images/Circuit Filtering 1.png>)
+
+- Tracks **active circuits** between hosts using TCP/IP headers (Layers 3 & 4)
+- Maintains a **circuit database** indexed by host addresses and port numbers
+- Controls who initiates connections and prevents unauthorized socket openings
+
+![NAT](images/NAT.png)
+
+- Uses **Network Address Translation (NAT)** to manage external/internal IP mappings
+- **Direction control**
+  - Internal users initiate connections → Filter allows return traffic
+  - External attackers cannot establish direct connections
+
+### Content Filtering
+- Analyses application-level data for security threats
+- Used for:  
+  - **Spam/malware filtering in emails**
+  - **Restricting access to malicious websites**
+- Content control can be enforced at:
+  - **Servers (e.g., email/web filters).*
+  - **Endpoints (e.g., user devices)**
+- Focus in cloud environments is on **server-based filtering** (e.g., anti-spam measures)
+
+# Quiz: Traffic Filtering
+Grade: 100%
+
+## Question 1
+
+We want to implement packet-filtered  service control to manage which application layer services are allowed through the firewall. Which protocol header does the packet filter examine?
+
+- Layer 3
+- Layer 7
+- Layer 2
+- **Layer 4**
+
+*Note: Layer 4 contains the server and client port numbers; the server port number generailly indicates the application-layer service. Layer 3 can distinguish between ICMP and application-layer services, but does not identify individual application-layer services.*
+
+## Question 2
+
+Is packet filtering considered more efficient than circuit filtering, or vice versa?
+
+- **Packet filtering is more efficient because it only searches a list of rules to make decisions. The circuit filter must search its rules plus search and maintain a list of active circuits.**
+- Circuit filtering is more efficient because it uses Network Address Translation (NAT).
+- Circuit filtering is more efficient because it decides on allowing or blocking an entire circuit when the circuit is first established. No more checking is required.
+- Packet filtering is more efficient because it only looks at Layer 2 and Layer 3 headers.
+
+*Note: Circuit filtering requires checking two separate databases while packet filtering checks only one.*
+
+## Question 3
+
+We want the packet filter to discard incoming packets that contain obvious address forgeries. For example, it should discard packets arriving from the internet that contain one of our site's IP addresses as the source address. Which protocol header should this filter examine?
+
+- Layer 7
+- **Layer 3**
+- Layer 2
+- Layer 4
+
+*Note: Layer 3 is the only header that contains IP addresses.*
+
+## Question 4
+
+Why can't an attacker on the internet easily send a packet to a host behind a NAT device?
+
+- **The NAT device won't deliver packets from the internet unless they belong to an established circuit.**
+- The NAT device never delivers packets that arrive from the internet.
+- The NAT device contains a list of authorised internet servers and discards all traffic from other hosts.
+
+*Note: The attacker can't send a packet to a host unless the host sends the attacker a packet first. It would not be practical to maintain a list of authorised servers.*
+
+## Question 5
+
+Which of the following internet protocols are used by client hosts to retrieve a user's email messages?
+
+- **Internet Message Access Protocol (IMAP)**
+- **Post Office Protocol 3 (POP3)**
+- Simple Mail Transfer Protocol (SMTP)
+- Message Queueing Telemetry Transport (MQTT)
+- Internet Control Message Protocol (ICMP)
+
+## Question 6
+
+At what layer do email protocols generally operate?
+
+- Layer 3
+- Layer 2
+- **Layer 7**
+- Layer 4
+
+*Note: Email is an application and Layer 7 handles application layer data.*
+
+## Question 7
+
+Tim has a small network and wants his filtering gateway to restrict access to specifically identified host computers. What protocol layer will do this most effectively?
+
+- **Layer 2**
+- Layer 3
+- Layer 4
+- Layer 7
+
+*Note: Most small networks assign IP addresses automatically, so individual hosts may receive different IP addresses whenever they connect. While it's often possible to modify a host's MAC address, it is the only identifying data that is assigned uniquely to all network hosts and accessible through packet filtering.*
+
+## Question 8
+
+At what protocol layer do we scan email for malware?
+
+- Layer 4
+- Layer 3
+- Layer 2
+- **Layer 7**
+
+*Note: A Layer 7 application can assemble each email out of its data packets and then scan the message for malware. The data field of a Layer 3 packet often contains only part of the email. While the Layer 4 header may identify a packet as being part of an email, the packet's data field often contains only part of the email.*
+
+# Graded Assignment: Cloud Service Outline
+Grade: 28/28
+
+*Locate an Internet service that you find interesting. Write a service outline for it using online descriptions. Provide links to information available online that supports what you say in the outline.*
+
+*This assignment consists of a series of prompts to guide you through constructing the service outline. For each prompt, provide the information requested, and the level of detail specified in the videos describing the service outline. For Prompts 1 through 4, include at least one link (web URL) in each prompt to provide an online source for the information you provide.*
+
+*Identify a site or vendor that provides an interesting Internet service. Find online descriptions of how that service works (if no descriptions exist, choose a different service). Choose a service with limited scope, for example, a service that tracks an event or activity. Provide web links to the specific details you use in producing your service outline.*
+
+## Project Title
+
+Strava: Social Fitness Tracking Platform
+​
+## Question 1
+
+Describe the Internet service provided. 
+Include at least one link (web URL) to an article that supports your answer.
+
+Strava is a social fitness tracking platform that enables users to record and share their physical activities, such as running, cycling, and swimming, using GPS data. The service offers features like activity analysis, goal setting, and community challenges, fostering a sense of community among fitness enthusiasts. Users can track their performance metrics, compare with others, and participate in virtual competitions.
+
+https://www.strava.com/features
+
+**Rubrics**
+
+- All links (one or more) led to relevant articles about the service.
+- Does it describe the type of information the site provides, or the action it performs, in response to a service request?
+- Does it describe how a user requests services from the site?
+- Does it identify the site's intended audience?
+- Does it describe who is authorized to use the service, and/or who is not authorized to use it, or does it say that there are not restrictions on who uses it?
+
+## Question 2
+
+Identify the sponsoring enterprise and its general business objectives. 
+Include at least one link (web URL) to an article that supports your answer.
+
+Strava, Inc. is the company behind the Strava platform. Founded in 2009, Strava aims to connect athletes worldwide through technology, providing tools to track and analyze workouts while fostering a global community of fitness enthusiasts. Their business objectives include expanding their user base, enhancing platform features, and monetizing through premium subscriptions and partnerships.
+
+https://press.strava.com/about
+
+**Rubrics**
+
+- All links (one or more) led to relevant articles about this prompt.
+- There is a description of the sponsoring enterprise
+- There is a reasonable description of why the enterprise exists and continues to operate.
+
+## Question 3
+
+Explain why the sponsoring enterprise is justified in spending money to operate this Internet service.
+Include at least one link (web URL) to an article that supports your answer.
+
+Operating the Strava platform allows Strava, Inc. to generate revenue through premium subscriptions, offering advanced features to users. Additionally, the platform's extensive user data provides opportunities for partnerships with fitness-related companies and brands, further monetizing their services. Investing in the platform enhances user engagement and satisfaction, leading to increased brand loyalty and market share.
+
+https://www.untaylored.com/post/how-strava-makes-money-the-business-model-explained
+
+**Rubrics**
+
+- All links (one or more) led to relevant articles about this prompt.
+- Does the explanation identify income the sponsor receives from the service, or losses the sponsor suffers if the service fails?
+
+## Question 4
+
+Identify the interested parties who support and use the service. This answer should not refer to the sponsoring enterprise in its role of administering the site.
+Include at least one link (web URL) to an article that supports your answer.
+
+Strava's user base includes amateur and professional athletes, fitness enthusiasts, and individuals seeking to improve their health. The platform is also utilized by coaches and trainers for monitoring and analyzing their clients' performance. Additionally, fitness-related brands and event organizers engage with Strava for marketing and partnership opportunities.
+
+https://www.similarweb.com/website/strava.com/#:~:text=strava.com%20Website%20Traffic%20Demographics,are%2025%20%2D%2034%20year%20olds.
+
+**Rubrics**
+
+- All links (one or more) led to relevant articles about this prompt.
+- Is there at least one interested party described? Do not include the sponsoring enterprise as an interested party.
+- Is there a description of some type of visitor or client who uses the service?
+- If the site relies on third-party content, are one or more interested parties described as providers of that content?
+- If the site relies on a third party participant for revenue, like an online advertising service, is it included in the list of interested parties?
+- If the site relies on clients with paid subscriptions, are subscribers included in the list of interested parties?
+- For each interested party, does the description identify the type of contribution, payment, or other service they render to the site, if any?
+
+## Question 5
+
+The site has suffered a breach of confidentiality. Describe the impact on the sponsoring enterprise and rate the impact using the CVSS scoring rubric.
+
+A breach of confidentiality on Strava could lead to unauthorized access to users' personal information, including location data, workout routines, and health metrics. This could erode user trust, result in legal consequences, and damage the company's reputation.
+
+Confidentiality (C): High – Sensitive user data could be exposed.
+Integrity (I): Low – The primary concern is data exposure rather than alteration.
+Availability (A): Low – The service remains operational.
+
+Overall, the base score would likely be in the high range, reflecting significant potential harm due to the sensitivity of the data involved.
+
+**Rubrics**
+
+- Does the impact description refer to information disclosure?
+- Does the impact description explain how the breach affects the sponsoring enterprise?
+- Does the CVSS impact code (High, Low, None) correspond to how the impact is described?
+
+## Question 6
+
+The site has suffered an integrity breach. Describe the impact on the sponsoring enterprise and rate the impact using the CVSS scoring rubric.
+
+An integrity breach on Strava could involve unauthorized modification of user data, such as altering activity records or performance metrics. This could undermine user confidence in the accuracy of the platform, leading to decreased engagement and potential loss of subscribers.
+
+Confidentiality (C): Low – The breach focuses on data alteration.
+Integrity (I): High – Data integrity is compromised.
+Availability (A): Low – The service remains accessible.
+
+The base score would likely be in the medium range, indicating a moderate impact due to the potential erosion of user trust.
+
+**Rubrics**
+
+- Does the impact description refer to an attack that changes the service's data and/or software?
+- Does the impact description explain how the attack affects the sponsoring enterprise?
+- Does the CVSS impact code (High, Low, None) correspond to how the impact is described?
+
+## Question 7
+
+The site has suffered an attack on its availability. Describe the impact on the sponsoring enterprise and rate the impact using the CVSS scoring rubric.
+
+An availability attack, such as a Distributed Denial of Service (DDoS), could render Strava's platform inaccessible to users. This would disrupt user activities, diminish user experience, and potentially lead to a loss of subscribers and revenue.
+
+Confidentiality (C): None – No data exposure occurs.
+Integrity (I): None – Data remains unaltered.
+Availability (A): High – The service is disrupted.
+
+The base score would likely be in the medium range, reflecting the significant impact on service availability and user satisfaction.
+
+**Rubrics**
+
+- Does the impact description refer to an attack that prevents authorized clients from using the service?
+- Does the impact description explain how the attack affects the sponsoring enterprise?
+- Does the CVSS impact code (High, Low, None) correspond to how the impact is described?
