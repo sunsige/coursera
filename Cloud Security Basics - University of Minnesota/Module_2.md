@@ -44,22 +44,22 @@
 - **Trust Boundaries & Network Segmentation**:
   - Attackers must first breach enterprise security before reaching admin functions
 
-  ![reaching the server](<images/Network Addressing 1.png>)
+  ![reaching the server](<images/module2/Network Addressing 1.png>)
 
 ## Network Addressing*
 - **Domain Names & IP Addresses**:
   - Humans use domain names (e.g., coursera.org), but computers use numerical IP addresses
   - IP addresses consist of a **host address** and a **port number**
 
-![socket interface](<images/Network Addressing 2.png>)
-![addresses](<images/Network Addressing 3.png>)
+![socket interface](<images/module2/Network Addressing 2.png>)
+![addresses](<images/module2/Network Addressing 3.png>)
 
 - **Sockets & Network Communication**:
   - A **socket** connects a client process to a server process
   - When two host computers have a conversation, it takes place using a socket relationship
   - Data packets include **port numbers**, **IP (Internet Protocol) addresses**, and **MAC (Media Access Control) addresses**
 
-![internet message](<images/Network Addressing 4.png>)
+![internet message](<images/module2/Network Addressing 4.png>)
 
 - **MAC Addresses & Local Networks**:
   - MAC addresses are used for local network communication
@@ -243,7 +243,7 @@ Which of the following is an example of a network with a layered defence?
 
 ## Question 5
 
-![Q5](<images/Quiz - Network Structure 1.png>)
+![Q5](<images/module2/Quiz - Network Structure 1.png>)
 
 Host 2.1 has the MAC addresses for the other four workstations, but does not have IP addresses. Given this network arrangement, to which hosts may it send packets?
 
@@ -265,7 +265,7 @@ Which of the following are private IP addresses?
 
 ## Question 7
 
-![Q7](<images/Quiz - Network Structure 2.png>)
+![Q7](<images/module2/Quiz - Network Structure 2.png>)
 
 Host 1.4 wants to send a packet to Host 2.3. When 1.4 sends the packet, what addresses appear in the MAC header?
 
@@ -356,7 +356,7 @@ For security reasons, Amalgamated Widget has kept part of their accounting depar
 
 ### Circuit Filtering**
 
-![circuit filtering](<images/Circuit Filtering 1.png>)
+![circuit filtering](<images/module2/Circuit Filtering 1.png>)
 
 - Tracks **active circuits** between hosts using TCP/IP headers (Layers 3 & 4)
 - Maintains a **circuit database** indexed by host addresses and port numbers
