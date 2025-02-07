@@ -308,7 +308,7 @@ For security reasons, Amalgamated Widget has kept part of their accounting depar
 
 # Security Controls
 
-![traffic filtering](<images/Traffic Filtering 1.png>)
+![traffic filtering](<images/module2/Traffic Filtering 1.png>)
 
 ## Packet Filtering
 - The step 4 network follows the principle of least privilege
@@ -321,8 +321,8 @@ For security reasons, Amalgamated Widget has kept part of their accounting depar
 - Applies access restrictions to each packet independently
 - Filters traffic based on packet headers (e.g., IP addresses, ports)
 
-![layers 1 and 2](<images/Traffic Filtering 2.png>)
-![layers 3 and 4](<images/Traffic Filtering 3.png>)
+![layers 1 and 2](<images/module2/Traffic Filtering 2.png>)
+![layers 3 and 4](<images/module2/Traffic Filtering 3.png>)
 
 - Works at various OSI layers:  
   - **Layer 1 (Physical):** Identifies physical network connections
@@ -330,7 +330,7 @@ For security reasons, Amalgamated Widget has kept part of their accounting depar
   - **Layer 3 (Network):** Examines IP headers (source/destination addresses)
   - **Layer 4 (Transport):** Inspects port numbers and connection status
 
-![service control](<images/Traffic Filtering 4.png>)
+![service control](<images/module2/Traffic Filtering 4.png>)
 
 ### Service Control
 - Restricts internet services to reduce attack surface
@@ -362,7 +362,7 @@ For security reasons, Amalgamated Widget has kept part of their accounting depar
 - Maintains a **circuit database** indexed by host addresses and port numbers
 - Controls who initiates connections and prevents unauthorized socket openings
 
-![NAT](images/NAT.png)
+![NAT](images/module2/NAT.png)
 
 - Uses **Network Address Translation (NAT)** to manage external/internal IP mappings
 - **Direction control**
